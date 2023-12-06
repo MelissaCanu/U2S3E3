@@ -18,7 +18,7 @@ fetch("https://striveschool-api.herokuapp.com/books")
     books.forEach((book) => {
       /* creo una colonna per card */
       const booksCol = document.createElement("div");
-      booksCol.className = "col-12 col-sm-6 col-md-4 col-lg-3 mb-4";
+      booksCol.className = "col-12 col-sm-6 col-md-4 col-lg-3 mb-3";
       /* card */
       const card = document.createElement("div");
       card.className = "card h-100";
@@ -31,6 +31,9 @@ fetch("https://striveschool-api.herokuapp.com/books")
       /* card body */
       const cardBody = document.createElement("div");
       cardBody.className = "card-body";
+      /* div per title e price */
+      const divTitlePrice = document.createElement("div");
+      divTitlePrice.className = "title-price-div d-flex flex-column mb-2";
       /* card title */
       const title = document.createElement("h5");
       title.className = "card-title";
@@ -38,32 +41,42 @@ fetch("https://striveschool-api.herokuapp.com/books")
       /* price */
       const prezzo = document.createElement("p");
       prezzo.className = "card-text";
-      prezzo.textContent = "Price: " + book.price;
+      prezzo.textContent = "Price: " + book.price + "$";
+
+      /* div bottoni */
+
+      const buttonsDiv = document.createElement("div");
+      buttonsDiv.className = "buttons-div d-flex justify-content-center";
 
       /* bottone compra */
 
       const buttonBuy = document.createElement("a");
       buttonBuy.href = "#";
-      buttonBuy.className = "btn btn-success";
+      buttonBuy.className = "btn btn-success mx-2 px-4";
       buttonBuy.textContent = "Buy";
 
       /* bottone scarta */
 
       const buttonDiscard = document.createElement("button");
-      buttonDiscard.className = "btn btn-danger text-white";
+      buttonDiscard.className = "btn btn-danger text-white mx-2";
       buttonDiscard.textContent = "Discard";
 
       /* aggiungo evento a btn discard */
 
       buttonDiscard.addEventListener("click", function () {
-        card.remove();
+        const col = card.closest(".col-12, .col-sm-6, .col-md-4, .col-lg-3");
+        if (col) {
+          col.remove();
+        }
       });
 
       /* appendo gli elementi */
-      cardBody.appendChild(title);
-      cardBody.appendChild(prezzo);
-      cardBody.appendChild(buttonBuy);
-      cardBody.appendChild(buttonDiscard);
+      cardBody.appendChild(divTitlePrice);
+      cardBody.appendChild(buttonsDiv);
+      divTitlePrice.appendChild(title);
+      divTitlePrice.appendChild(prezzo);
+      buttonsDiv.appendChild(buttonBuy);
+      buttonsDiv.appendChild(buttonDiscard);
       card.appendChild(image);
       card.appendChild(cardBody);
       booksCol.appendChild(card);
