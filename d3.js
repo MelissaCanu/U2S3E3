@@ -40,15 +40,30 @@ fetch("https://striveschool-api.herokuapp.com/books")
       prezzo.className = "card-text";
       prezzo.textContent = "Price: " + book.price;
 
-      const button = document.createElement("a");
-      button.href = "#";
-      button.className = "btn btn-success";
-      button.textContent = "Buy";
+      /* bottone compra */
+
+      const buttonBuy = document.createElement("a");
+      buttonBuy.href = "#";
+      buttonBuy.className = "btn btn-success";
+      buttonBuy.textContent = "Buy";
+
+      /* bottone scarta */
+
+      const buttonDiscard = document.createElement("button");
+      buttonDiscard.className = "btn btn-danger text-white";
+      buttonDiscard.textContent = "Discard";
+
+      /* aggiungo evento a btn discard */
+
+      buttonDiscard.addEventListener("click", function () {
+        card.remove();
+      });
 
       /* appendo gli elementi */
       cardBody.appendChild(title);
       cardBody.appendChild(prezzo);
-      cardBody.appendChild(button);
+      cardBody.appendChild(buttonBuy);
+      cardBody.appendChild(buttonDiscard);
       card.appendChild(image);
       card.appendChild(cardBody);
       booksCol.appendChild(card);
