@@ -10,23 +10,24 @@ fetch("https://striveschool-api.herokuapp.com/books")
     /* qua manipolo i dati ad esempio con la DOM manipulation */
     const booksContainer = document.getElementById("booksContainer");
     const booksRow = document.createElement("div");
-    booksRow.className = "row align-items-start";
-    const booksCol = document.createElement("div");
-    booksCol.className = "col-12 col-md-6 col-lg-4";
+    booksRow.className = "row";
 
     /* appendo i child ai parent */
-    booksRow.appendChild(booksCol);
     booksContainer.appendChild(booksRow);
 
     books.forEach((book) => {
+      /* creo una colonna per card */
+      const booksCol = document.createElement("div");
+      booksCol.className = "col-12 col-sm-6 col-md-4 col-lg-3 mb-4";
       /* card */
       const card = document.createElement("div");
-      card.className = "card";
+      card.className = "card h-100";
       /* img */
       const image = document.createElement("img");
       image.src = book.img;
-      image.className = "card-img-top";
+      image.className = "card-img-top img-fluid";
       image.alt = book.title;
+
       /* card body */
       const cardBody = document.createElement("div");
       cardBody.className = "card-body";
@@ -47,9 +48,11 @@ fetch("https://striveschool-api.herokuapp.com/books")
       /* appendo gli elementi */
       cardBody.appendChild(title);
       cardBody.appendChild(prezzo);
+      cardBody.appendChild(button);
       card.appendChild(image);
       card.appendChild(cardBody);
       booksCol.appendChild(card);
+      booksRow.appendChild(booksCol);
     });
   })
 
